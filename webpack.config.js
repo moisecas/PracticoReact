@@ -8,7 +8,8 @@ module.exports={ //objeto donde vamos a tener toda la configuración
     entry: './src/index.js', //punto de entrada 
     output:{ //donde va a estar el proyecto 
         path: path.resolve(__dirname, 'dist'), //crear un resolve para determinar donde va a estar el proyecto
-        filename: 'bundle.js' //nombre al empaquetado 
+        filename: 'bundle.js', //nombre al empaquetado 
+        publicPath: '/' 
     },
     module: 'development', //agregar el modo desarrollador 
     resolve:{
@@ -32,7 +33,7 @@ module.exports={ //objeto donde vamos a tener toda la configuración
                 ]
             },
             {
-                test:/\.S[ac]SS$/i, //identificacion de ext que vamos a usar 
+                test:/\.(css|scss)$/, //identificacion de ext que vamos a usar 
                 use: [ //añadir la configuración con las que vamos a trabajar, lo que instale por consola 
                     "style-loader",
                     "css-loader",
@@ -50,9 +51,7 @@ module.exports={ //objeto donde vamos a tener toda la configuración
             filename:'[name].css'
         }),
     ],
-    devServer: { //agregar para que el servidor funcione sin ningún problema 
-        allowedHosts: path.join(__dirname, 'dist'),
-        compress: true,
-        port: 3005,
-    } 
+	devServer: {
+		historyApiFallback: true,
+	}
 }
